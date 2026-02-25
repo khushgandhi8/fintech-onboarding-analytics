@@ -1,73 +1,64 @@
 # Fintech Onboarding: A/B Test & Incentive ROI Analysis
 
-**Does a $5 first-deposit bonus improve onboarding conversion — and is it worth it?**
+I built a simulated 10,000-user fintech onboarding funnel to test whether a $5 first-deposit bonus actually makes sense - statistically and economically. Short answer: it moves conversion, but the unit economics don't hold up at realistic ARPU.
 
-This project simulates a 10,000-user fintech onboarding funnel to answer that question using A/B testing, funnel analysis, segmentation, and unit economics modeling.
-
-📊 **[View Live Dashboard →](https://khushgandhi8.github.io/fintech-onboarding-analytics/)**
+📊 **[Live Dashboard →](https://khushgandhi8.github.io/fintech-onboarding-analytics/)**
 
 ---
 
-## The Problem
+## Background
 
-A personal finance app offers users a $5 cash bonus to make their first deposit within 7 days of signup. The product team wants to know: does it actually move the needle, and does the math work out?
+A personal finance app wants to increase first deposits by offering new users a $5 cash bonus if they deposit within 7 days of signup. The funnel is simple: signup → bank link → first deposit. The question is whether the bonus pays for itself.
 
-The funnel has three steps: **signup → bank link → first deposit**. The north star metric is **first deposit rate within 7 days**.
+North star metric: **first deposit rate within 7 days of signup**
 
 ---
 
-## What I Found
+## Results
 
-The bonus works statistically — but fails on unit economics.
+The bonus works. The ROI doesn't - at least not yet.
 
 | Variant | First Deposit Rate | Lift | p-value |
 |---|---|---|---|
-| Control (no bonus) | 18.0% | — | — |
-| Treatment ($5 blanket bonus) | 22.1% | +4.12pp | <1e-6 |
-| Targeted (paid channel only) | 19.46% | +1.46pp | 0.062 |
+| Control | 18.0% | - | - |
+| $5 blanket bonus | 22.1% | +4.12pp | <1e-6 |
+| $3 targeted (paid channel) | 19.46% | +1.46pp | 0.062 |
 
-The blanket bonus produces a highly significant lift, but at ARPU = $20, the cost of the bonus exceeds the incremental revenue it generates — **negative ROI**. The break-even bonus amount is **$3.48**, and the break-even ARPU for the $5 bonus is **~$30**.
+At ARPU = $20, the blanket bonus costs more than the incremental revenue it generates. Break-even bonus is **$3.48**; break-even ARPU for the $5 bonus is **~$30**.
 
-The biggest leak in the funnel isn't the deposit step — it's **bank linking**, where 64.4% of users drop off. This is likely a UX problem, not an incentive problem.
+One thing that stood out: the biggest drop in the funnel isn't at the deposit step - it's bank linking, where 64.4% of users fall off. That's probably a UX issue, not an incentive issue.
 
 ---
 
 ## Recommendation
 
-1. **Don't roll out the $5 blanket bonus.** Statistically significant ≠ economically justified.
-2. **Test a $3 bonus targeted to paid-channel users**, who show the highest baseline intent (~23% deposit rate).
-3. **Prioritize fixing the bank-link drop-off.** A 10pp improvement there would outperform any deposit incentive at zero marginal cost.
-4. **Invest in post-deposit retention** to raise ARPU toward $30+, at which point the $5 bonus becomes profitable.
+1. Don't ship the $5 blanket bonus. Statistically significant ≠ economically justified.
+2. Test a $3 bonus targeted at paid-channel users - they have the highest baseline intent (~23% deposit rate) and make the math closer to working.
+3. Look hard at the bank-link drop-off before running more deposit experiments. Fixing that step is free and would likely outperform any bonus.
+4. If post-deposit retention improves and ARPU reaches ~$30+, the $5 bonus becomes profitable without any experiment changes.
 
 ---
 
-## Segmentation Highlights
+## Segmentation
 
-- **Working professionals** convert at ~24% vs. ~14% for students — nearly 2x the rate
-- **Paid-channel users** are the highest-intent segment and the best target for any incentive
-- Device type (iOS vs. Android) showed minimal difference
+- Working professionals convert at ~24% vs ~14% for students
+- Paid-channel users are the strongest segment for targeting any incentive
+- iOS vs Android showed no meaningful difference
 
 ---
 
-## Project Structure
+## Repo Structure
 
 ```
-├── data/               # Simulated SQLite database (10k users)
-├── notebooks/          # Analysis notebook with visualizations
-├── sql/                # Queries for funnel metrics and experiment results
-├── src/                # Data generation and analysis scripts
-├── docs/               # Live dashboard (index.html) and decision memo
-└── README.md
+├── data/          # Simulated SQLite database (10k users)
+├── notebooks/     # Analysis + visualizations
+├── sql/           # Funnel and experiment queries
+├── src/           # Data generation and analysis scripts
+├── docs/          # Dashboard (index.html) and decision memo
 ```
 
 ---
 
 ## Stack
 
-Python · SQLite · pandas · matplotlib · HTML/CSS/JS
-
----
-
-## Skills Demonstrated
-
-Experimental design · Statistical hypothesis testing · Funnel analysis · Cohort segmentation · Unit economics modeling · Data visualization · Business recommendation framing
+Python, SQLite, pandas, matplotlib, HTML/CSS/JS
