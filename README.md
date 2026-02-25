@@ -7,6 +7,8 @@ Key findings:
 - Targeted incentive reduced cost but required smaller bonus (~$3.50) or higher ARPU (~$30) to break even.
 - Demonstrates experimental design, segmentation, statistical testing, and business decision modeling.
 
+## View live dashboard: https://khushgandhi8.github.io/fintech-onboarding-analytics/
+
 ## Product Overview
 This project analyzes onboarding conversion in a personal finance app where users:
 
