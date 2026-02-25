@@ -1,10 +1,15 @@
 import sqlite3
+import os
 
-# Create database file
-conn = sqlite3.connect("data/fintech.db")
+DB_PATH = "data/fintech.db"
+
+# Delete old db file to start fresh
+if os.path.exists(DB_PATH):
+    os.remove(DB_PATH)
+
+conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
-# Load schema
 with open("sql/schema.sql", "r") as f:
     schema = f.read()
 
@@ -13,4 +18,4 @@ cursor.executescript(schema)
 conn.commit()
 conn.close()
 
-print("Database created successfully.")
+print("Fresh database created successfully.")

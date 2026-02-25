@@ -26,3 +26,18 @@ Control: Existing onboarding flow
 Treatment: Improved onboarding flow  
 
 Goal: Increase bank_link_rate and first_deposit_rate
+
+## Event Definitions
+
+- signup: user account successfully created
+- bank_link: user successfully links bank account
+- first_deposit: user's first successful deposit transaction within 7 days of signup
+
+## Assumptions
+
+- Users must complete bank_link before making a deposit.
+- Deposits can fail due to insufficient funds or verification issues.
+- Only successful deposits count toward first_deposit_rate.
+- First Deposit Rate is calculated as:
+  (# users with successful first_deposit within 7 days) / (# total signups)
+
